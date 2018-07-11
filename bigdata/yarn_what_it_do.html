@@ -1,0 +1,238 @@
+
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+  Jekyll integration by somiibo.com
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+<title>Welcome to Jekyll Theme!</title>
+<meta name="description" content="">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/blog_space//assets/icon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/blog_space//assets/icon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/blog_space//assets/icon/favicon-16x16.png">
+<link rel="manifest" href="/blog_space//assets/icon/manifest.json">
+<link rel="mask-icon" href="/blog_space//assets/icon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/blog_space//assets/icon/favicon.ico">
+<meta name="msapplication-config" content="/blog_space//assets/icon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- CSS -->
+<link rel="stylesheet" href="/blog_space//assets/css/main.css" />
+<noscript><link rel="stylesheet" href="/blog_space//assets/css/noscript.css" /></noscript>
+
+	</head>
+	<body class="is-loading">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Header -->
+        <header id="header">
+          <a href="/blog_space//" class="logo">blog_space</a>
+        </header>
+
+				<!-- Nav -->
+					<nav id="nav">
+
+            <ul class="links">
+  <li class=""><a href="/blog_space/">Theme Home</a></li>
+  <li class=""><a href="/blog_space/about/">About</a></li>
+  <li class=" active "><a href="/blog_space//blog/">Blog</a></li>
+</ul>
+
+
+						<ul class="icons">
+              <li><a href="https://twitter.com/default" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+              <li><a href="https://facebook.com/default" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
+              <li><a href="https://instagram.com/default" class="icon fa-instagram" rel="nofollow"><span class="label">Instagram</span></a></li>
+              <li><a href="https://github.com/default" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+				<div id="main">
+          <section class="post">
+    				<header class="major">
+      				<span class="date">12 Oct 2017</span>
+      				<h1>YARN - Yet Another Resource Navigator</h1>
+      			</header>
+<h2><b>YARN - Yet Another Resource Negotiator </b></h2>
+<hr>
+<h3><b>Introduction</b></h3>
+<p id="yarn">
+The basic behind the introduction of YARN was to split the functionality of Resource Management and 
+Job scheduling. Prior to YARN, MapReduce-1 was used in which there were 2 component Job Tracker and 
+Task Tracker where Job Tracker was used to do work of both the job scheduling and task progress reporting, 
+these 2 are run as 2 different entities in YARN/MapReduce -2 named as Resource Manager and Application Master.
+</p>
+<hr>
+<h3><b>Components</b></h3>
+<p id="yarn">
+
+1. <b>Resource Manager</b> - It is the ultimate authority that allocates resource among all application in
+ the system. It is also responsible for allocating container in which application master will start and
+ initializing it after container allocation.  
+<br><br> 
+2. <b>Node Manager</b> - It is responsible for monitoring container and their resource usage.
+<br><br>
+<img border="2" hspace="20" align="middle" src="images/yarn_architecture.png"  height="110%" width="45%"/>
+<br><br>
+3. <b>Application Master</b> - it is responsible for negotiating resources from Resource Manager and working with 
+node manager to execute and monitor the container and their resource consumption
+ <br><br>
+4.<b> Container</b> - Depict bunch of resource like CPU, Memory, and Disk etc. required for processing of the task. 
+It is the result of successful resource allocation from the resource manager. Container grant the right to
+ application master to use a specific amount of resource on a specific machine (node) in a cluster.
+  There can be multiple containers on the same machine.
+<br>
+</p>
+<hr>
+<h3><b>Communication flow within YARN </b></h3>
+<p id="yarn">
+
+1. Client program submit the application and specification for application master
+<br><br> 
+2. Resource manager takes responsibility to allocate specified container in which Application Master will 
+start, then it initiates Application Master.
+<br><br> 
+3. Application Master boot up and register with Resource manager. This help client to get to know certain 
+required details directly via Application Master.
+ <br><br>
+<br>
+<img border="2" hspace="20" align="middle" src="images/yarn_architecture_update.png"  height="110%" width="45%"/>
+<br><br>
+4. Application Master then makes a resource request to resource manager for allocation of the container
+ with the appropriate resource via Resource Request Protocol (RRP).
+ <br><br>
+5. On successful container allocation Application Master introduce it to Node Manager with required details
+ for launching container. Before starting container Node Manager verifies container allocation with Resource 
+ Manager to avoid fake allocation.
+ <br><br>
+6. When Application code executes within the container, the container provides appropriate information to 
+its Application Master via Application Specific Protocol (ASP).
+ <br><br>
+7. During execution client directly connect with Application Master to get Status, Progress etc. via 
+Application Specific Protocol.
+ <br><br>
+8. Once the process of the application submitted by the user is complete, Application Master deregister 
+itself with Resource Manager and shut down, allowing its own container to release and reuse. 
+Along with it, all the container are released again.   
+<br><br>
+</p>
+      		</section>
+
+          <div class="comments-wrapper">
+          <div id="disqus_thread"></div>
+          <script>
+              /**
+               *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+               *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+               */
+
+              var disqus_config = function () {
+                  this.page.url = '/blog/welcome-to-massively-the-jekyll-theme/';  /*Replace PAGE_URL with your page's canonical URL variable*/
+                  this.page.identifier = '/blog/welcome-to-massively-the-jekyll-theme/'; /*Replace PAGE_IDENTIFIER with your page's unique identifier variable*/
+              };
+
+              (function() {  /* dont endit below this line */
+                  var d = document, s = d.createElement('script');
+
+                  s.src = 'https://default.disqus.com/embed.js';
+
+                  s.setAttribute('data-timestamp', +new Date());
+                  (d.head || d.body).appendChild(s);
+              })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div><!-- /.comments-wrapper -->
+
+
+					<!-- Footer -->
+						<footer>
+              <ul class="actions">
+                <li><a href="/blog_space//blog/" class="button">Our Blog</a></li>
+              </ul>
+						</footer>
+					</div>
+
+				<!-- Footer -->
+        <footer id="footer">
+  <section>
+    <form method="POST" action="https://formspree.io/info@default.com">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" />
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" />
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea name="message" id="message" rows="3"></textarea>
+      </div>
+      <ul class="actions">
+        <li><input type="submit" value="Send Message" /></li>
+      </ul>
+    </form>
+  </section>
+  <section class="split contact">
+    <section class="alt">
+      <h3>Location</h3>
+      <p>Los Angeles, CA</p>
+    </section>
+    <section>
+      <h3>Phone</h3>
+      <p><a href="tel:310-318-5555">310-318-5555</a></p>
+    </section>
+    <section>
+      <h3>Email</h3>
+      <p><a href="mailto:info@default.com">info@default.com</a></p>
+    </section>
+    <section>
+      <h3>Social</h3>
+      <ul class="icons alt">
+        <li><a href="https://twitter.com/default" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+        <li><a href="https://facebook.com/default" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
+        <li><a href="https://instagram.com/default" class="icon fa-instagram" rel="nofollow"><span class="label">Instagram</span></a></li>
+        <li><a href="https://github.com/default" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+      </ul>
+    </section>
+  </section>
+</footer>
+<!-- Copyright -->
+<div id="copyright">
+  <ul><li>&copy; HTML5 UP</li><li>Design by <a href="https://html5up.net" rel="nofollow">HTML5 UP</a></li><li>Jekyll Integration by <a href="https://soundgrail.com">SoundGrail</a></li></ul>
+</div>
+
+
+			</div>
+
+      <!-- Scripts -->
+  		<!-- DYN -->
+<script src="/blog_space//assets/js/jquery.min.js"></script>
+<script src="/blog_space//assets/js/jquery.scrollex.min.js"></script>
+<script src="/blog_space//assets/js/jquery.scrolly.min.js"></script>
+<script src="/blog_space//assets/js/skel.min.js"></script>
+<script src="/blog_space//assets/js/util.js"></script>
+<script src="/blog_space//assets/js/main.js"></script>
+
+			<script async src="https://www.googletagmanager.com/gtag/js?id=default"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'default');
+</script>
+
+
+	</body>
+</html>
