@@ -1,0 +1,449 @@
+
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+  Jekyll integration by somiibo.com
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+<title>Welcome to Jekyll Theme!</title>
+<meta name="description" content="">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/blog_space//assets/icon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/blog_space//assets/icon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/blog_space//assets/icon/favicon-16x16.png">
+<link rel="manifest" href="/blog_space//assets/icon/manifest.json">
+<link rel="mask-icon" href="/blog_space//assets/icon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/blog_space//assets/icon/favicon.ico">
+<meta name="msapplication-config" content="/blog_space//assets/icon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- CSS -->
+<link rel="stylesheet" href="/blog_space//assets/css/main.css" />
+<noscript><link rel="stylesheet" href="/blog_space//assets/css/noscript.css" /></noscript>
+
+	</head>
+	<body class="is-loading">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Header -->
+        <header id="header">
+          <a href="/blog_space//" class="logo">Massively</a>
+        </header>
+
+				<!-- Nav -->
+					<nav id="nav">
+
+            <ul class="links">
+  <li class=""><a href="/blog_space//">Theme Home</a></li>
+  <li class=""><a href="/blog_space//about/">About</a></li>
+  <li class=" active "><a href="/blog_space//blog/">Blog</a></li>
+  <li class=""><a href="/blog_space//elements/">Elements Reference</a></li>
+</ul>
+
+
+						<ul class="icons">
+              <li><a href="https://twitter.com/default" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+              <li><a href="https://facebook.com/default" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
+              <li><a href="https://instagram.com/default" class="icon fa-instagram" rel="nofollow"><span class="label">Instagram</span></a></li>
+              <li><a href="https://github.com/default" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+				<div id="main">
+          <section class="post">
+    				<header class="major">
+      				<span class="date">12 Oct 2017</span>
+      				<h1>Flume</h1>
+      			</header>
+      			<div class="image main"><img src="/images/pic02.jpg" alt=""></div>
+      			<p><h2 id="how-to-use-this-theme">How to Use This Theme</h2>
+<p>Just go ahead and read up on <a href="https://jekyllrb.com/">how to install Jekyll</a>. It’s not too hard I promise!</p>
+
+<p>Download this repository <a href="https://github.com/iwiedenm/jekyll-theme-massively">here</a> and save it to any folder you want.</p>
+
+<p>Open a terminal window or a command line and <code class="highlighter-rouge">cd</code> to that location.</p>
+
+<p>Then enter: <code class="highlighter-rouge">bundle exec jekyll serve</code>. You can now access your new Jekyll site from <a href="http://127.0.0.1:4000/">http://127.0.0.1:4000/</a>. Have fun exploring your new site!</p>
+<h3><b> Introduction </b></h3>
+<p>
+Apache Flume is a distributed, reliable, and available system for efficiently collecting, 
+aggregating and moving large amounts of log data from many different sources to a centralized data store.
+</p>
+<h3><b>Architecture</b></h3>
+<p>
+A Flume event is defined as a unit of data flow having a byte payload and an optional set of 
+string attributes. A Flume agent is a (JVM) process that hosts the components through which
+events flow from an external source to the next destination (hop).
+</p>
+<img border="2" hspace="20" align="middle" src="images/DataFlow.png" height="4000%" width="80%"><br>
+<p>A Flume source consumes events delivered to it by an external source like a web server. 
+The external source sends events to Flume in a format that is recognized by the target Flume source.
+For example, an Avro Flume source can be used to receive Avro events from Avro clients or other Flume 
+agents in the flow that send events from an Avro sink.
+The channel is a passive store that keeps the event until its consumed by a Flume sink. 
+The file channel is one example – it is backed by the local filesystem. 
+The sink removes the event from the channel and puts it into an external repository like 
+HDFS (via Flume HDFS sink) or forwards it to the Flume source of the next Flume agent (next hop) in the flow.
+The source and sink within the given agent run asynchronously with the events staged in the channel.
+
+<br><br>
+There are few rules to be remembered while designing flume data flow <br>
+	1. There can be multiple channel per agent.<br>
+	2. There can not be more then 1 source per agent. ( Here we are taking about per agent not for whole data flow)
+	<br>3. There can not be more then  1 Sink per agent.<br>
+	4. Source in an agent can receive data simultaneously from multiple external source.  
+<br>
+
+There can be multiple agents.Flume allows a user to build multi-hop flows where events travel through 
+multiple agents before reaching the final destination. 
+<br>
+<br></p>
+<h3><b>DataFlow</b></h3>
+Flume support these dataflow - <br><br>
+<img border="2" hspace="20" align="middle" src="images/MultiAgentFlow.png" height="4000%" width="60%"><br>
+<br> <b>1. Multi Agent Data Flow</b> (as shown above) - sink of the previous agent and source of the current hop 
+need to be avro type with the sink pointing to the hostname (or IP address) and port of the source.<br>
+<br><img border="2" hspace="20" align="middle" src="images/Consolidation.png" height="6000%" width="60%"><br>
+<br><b>2. Consolidation </b>(as shown above) - This can be achieved in Flume by configuring a number of
+ first tier agents with an avro sink, all pointing to an avro source of single agent
+ . This source on the second tier agent consolidates the received events into a single 
+ channel which is consumed by a sink to its final destination<br>
+<br><img border="2" hspace="20" align="middle" src="images/Multiplexing.png" height="5000%" width="60%"><br>
+<br><b>3. Multiplexing</b> (as shown above) - Flume supports multiplexing the event flow to one or more destinations.
+ This is achieved by defining a flow multiplexer that can replicate or selectively route an event to one or more channels.
+<br>
+<br>
+Flume works on transactional approach to ensure reliability. 
+<br><hr>
+<p ><b>Now Let's do some example for better understanding of how flume works - </b></p>
+As we saw in agent diagram that for defining flume dataflow we need following things - 
+<br>1. Sink
+<br>2. Source
+<br>3. Channel
+<br><br>
+Now there are multiple varieties of sources, sinks and channel avialable.for Example 1  
+we are going to take <br>
+<ul style="list-style-type:disc">
+ <li>Logger as Sink</li>
+ <li>NetCat as Source</li>
+<li>Memory Channel as Channel</li>
+</ul>
+<h3><b>Example 1</b></h3>
+<p>For this example I used CentOS 6.8 with flume installed.</p>
+In order to use flume as a pipeline we need to define a configuration file which contain information
+about source, sink and channel we want to use.
+<pre><code class="bash">
+Given below is configuration file for this example 
+# example.conf: A single-node Flume configuration
+# 1 Name the components on this agent
+a1.sources = r1
+a1.sinks = k1
+a1.channels = c1
+# 2 Describe/configure the source
+a1.sources.r1.type = netcat
+a1.sources.r1.bind = localhost
+a1.sources.r1.port = 44444
+# 3 Describe the sink
+a1.sinks.k1.type = logger
+# 4 Use a channel which buffers events in memory
+a1.channels.c1.type = memory
+a1.channels.c1.capacity = 1000
+a1.channels.c1.transactionCapacity = 100
+# 5 Bind the source and sink to the channel
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1
+</code></pre>
+<br><br>
+<p><b>Now lets understand what its each component do -</b><br>
+<b>#1 Name the component</b>
+<pre class="bash"><code>
+
+# Name the components on this agent
+#a1 is name of our agent
+a1.sources = r1 # r1 is name of our source
+a1.sinks = k1 # k1 is name of our sink
+a1.channels = c1 #c1 is name of our channel
+
+</code></pre>
+ Here we have just given name to all the component. 
+ <b>Where a1 is name of our agent. 
+ </b>Throughout our configuration file we are going to use a1 as name of agent. 
+ Now in case of multiple agent we need to declare every agent in this similar fashion
+<br><br>
+<b>#2 Source Configuration</b>
+<pre class="bash"><code>
+# 2 Describe/configure the source
+a1.sources.r1.type = netcat
+a1.sources.r1.bind = localhost # Host name or IP address to bind to
+# since we are generating data from same system we are using localhost as bind
+a1.sources.r1.port = 44444 # Port to bind to
+
+</code></pre>
+In source configuration we give details about the type of source we are going to use. 
+<br>There are multiple type of
+Source available to work with flume some of those are - AVRO, Thrift, Exec, Kafka etc. 
+<b>Here we are using netcat as our source.</b> 
+<pre class="bash"><code>
+Netcat (often abbreviated to nc) - is a computer networking utility for reading from and writing to network connections using TCP or UDP. Netcat is designed to be a dependable back-end that can be used directly or easily driven by other programs and scripts.
+</code></pre>
+<br><br>
+<b># 3 Describe the sink</b>
+<pre class="bash"><code>
+a1.sinks.k1.type = logger
+</code></pre>
+We are using our terminal as sink which simply means that whatever data will come it will be displayed on terminal
+<br><br>
+<b># 4 channel Configuration</b>
+<pre class="bash"><code>
+a1.channels.c1.type = memory
+a1.channels.c1.capacity = 1000
+a1.channels.c1.transactionCapacity = 100
+</code></pre>
+<b>We are using memory type channel here.</b>
+<br> This channel have various property attached to it but the given 3 properties are compulsory to be defined. 
+<br><br>
+
+<b># 5 Bind the source and sink to the channel</b>
+<pre class="bash"><code>
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1
+</code></pre>
+Here we are simply binding the source and sink with channel. In case of multiple channel we need to 
+we need to attach each channel with required number of source and channel.
+<br><hr>
+Now we need to save example.conf in conf folder of flume. If you are using centos provided by cloudera then
+flume will be installed in following directory <b>/usr/lib/flume</b> So open this directory there will
+be folder name conf inside it now save the example.conf inside it.<br>
+After saving example.conf. Enter this command in terminal.
+<pre class="bash"><code>$ ./flume-ng agent --conf conf --conf-file example.conf --name a1 -Dflume.root.logger=INFO,console</code></pre>
+<br>
+Now we need to create a source at port number 44444 as defined in our configuration file. We will use
+netcat for it. In order to create a source we will use telnet. Enter the following command in terminal
+<pre class="bash"><code> $ telnet localhost 44444</code></pre>
+<br>
+<b>Congrats you have created your first flume application.</b>  
+<br>
+<h3><b>Example 2</b></h3>
+<b>Getting Twitter Data with Flume</b>
+<p>Just like in last example here also we need a configuration file in order to connect with twitter source</p>
+<br> Given below is our configuration file
+<pre class="bash"><code>
+# Naming the components on the current agent. 
+TwitterAgent.sources = Twitter 
+TwitterAgent.channels = MemChannel 
+TwitterAgent.sinks = HDFS
+  
+# Describing/Configuring the source 
+TwitterAgent.sources.Twitter.type = org.apache.flume.source.twitter.TwitterSource
+TwitterAgent.sources.Twitter.consumerKey = Your OAuth consumer key
+TwitterAgent.sources.Twitter.consumerSecret = Your OAuth consumer secret 
+TwitterAgent.sources.Twitter.accessToken = Your OAuth consumer key access token 
+TwitterAgent.sources.Twitter.accessTokenSecret = Your OAuth consumer key access token secret 
+TwitterAgent.sources.Twitter.keywords = tutorials point,java, bigdata, mapreduce, mahout, hbase, nosql
+  
+# Describing/Configuring the sink 
+TwitterAgent.sinks.HDFS.type = hdfs 
+TwitterAgent.sinks.HDFS.hdfs.path = hdfs://localhost:9000/user/Hadoop/twitter_data/
+TwitterAgent.sinks.HDFS.hdfs.fileType = DataStream 
+TwitterAgent.sinks.HDFS.hdfs.writeFormat = Text 
+TwitterAgent.sinks.HDFS.hdfs.batchSize = 1000
+TwitterAgent.sinks.HDFS.hdfs.rollSize = 0 
+TwitterAgent.sinks.HDFS.hdfs.rollCount = 10000 
+ 
+# Describing/Configuring the channel TwitterAgent.channels.MemChannel.type = memory 
+TwitterAgent.channels.MemChannel.capacity = 10000 
+TwitterAgent.channels.MemChannel.transactionCapacity = 100
+  
+# Binding the source and sink to the channel 
+TwitterAgent.sources.Twitter.channels = MemChannel
+TwitterAgent.sinks.HDFS.channel = MemChannel 
+</code></pre>
+<b>
+Now lets see all component of our cofiguration file one by one
+</b>
+<b># Naming the components for TwitterAgent </b>
+<pre class="bash"><code>
+#Naming the components on the current agent.
+TwitterAgent.sources = Twitter 
+TwitterAgent.channels = MemChannel 
+TwitterAgent.sinks = HDFS
+</code></pre>
+Here we have just given name to all the component.
+ Here TwitterAgent  is name of our agent.
+  Throughout our configuration file we are going to use TwitterAgent as name of agent.
+   Now in case of multiple agent we need to declare every agent in this similar fashion
+
+  <br><br>
+<b># Describing/Configuring the source </b>
+<pre class="bash"><code>
+#Describing the source
+TwitterAgent.sources.Twitter.type = org.apache.flume.source.twitter.TwitterSource
+TwitterAgent.sources.Twitter.consumerKey = Your OAuth consumer key
+TwitterAgent.sources.Twitter.consumerSecret = Your OAuth consumer secret 
+TwitterAgent.sources.Twitter.accessToken = Your OAuth consumer key access token 
+TwitterAgent.sources.Twitter.accessTokenSecret = Your OAuth consumer key access token secret 
+TwitterAgent.sources.Twitter.keywords = tutorials point,java, bigdata, mapreduce, mahout, hbase, nosql # these are the keyword which we want our tweets
+ </code></pre>
+In source configuration we give details about the type of source we are going to use. Here we are using Twitter as a source. In order to connect with twitter we need to register our application with twitter. After registering our application with twitter we will be provided 4 property 
+<br>	1. Consumer key
+<br>	2. ConsumerSecret
+<br>    3. Access Token
+<br>	4. Access Token Secret
+	<br>
+After this we need to provided all these properties inside configuration file as mentioned above in "Describing the source".
+<br><br><b>
+#Registering with Twitter</b>
+<b>
+# Describing/Configuring the sink </b>
+<pre class="bash"><code>
+#Describing the sink
+TwitterAgent.sinks.HDFS.type = hdfs 
+TwitterAgent.sinks.HDFS.hdfs.path = hdfs://localhost:8020/user/Hadoop/twitter_data/
+TwitterAgent.sinks.HDFS.hdfs.fileType = DataStream 
+TwitterAgent.sinks.HDFS.hdfs.writeFormat = Text 
+TwitterAgent.sinks.HDFS.hdfs.batchSize = 1000
+TwitterAgent.sinks.HDFS.hdfs.rollSize = 0 
+TwitterAgent.sinks.HDFS.hdfs.rollCount = 10000 
+ </code></pre>
+Our sink is going to be hdfs thus we need to provide url at which we want to save incoming data from twitter. Type of file in which all data will be stored is DataStream.  
+<br><br><b>
+# Describing/Configuring the channel</b>
+<pre class="bash"><code>
+TwitterAgent.channels.MemChannel.type = memory 
+TwitterAgent.channels.MemChannel.capacity = 10000 
+TwitterAgent.channels.MemChannel.transactionCapacity = 100
+</code></pre>
+Similar to our last example here also we will use Memory Channel
+ <br><br><b> 
+# Binding the source and sink to the channel </b>
+<pre class="bash"><code>
+TwitterAgent.sources.Twitter.channels = MemChannel
+TwitterAgent.sinks.HDFS.channel = MemChannel 
+</code></pre>
+Here we are binding channel with source and sink
+<br>
+<br>
+Now we need to save twitter.conf in conf folder of flume. If you are using centos provided by cloudera then
+flume will be installed in following directory <b>/usr/lib/flume</b> So open this directory there will
+be folder name conf inside it now save the twitter.conf inside it.<br>
+After saving twitter.conf. Enter this command in terminal.
+
+      		</section>
+
+          <div class="comments-wrapper">
+          <div id="disqus_thread"></div>
+          <script>
+              /**
+               *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+               *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+               */
+
+              var disqus_config = function () {
+                  this.page.url = '/blog/welcome-to-massively-the-jekyll-theme/';  /*Replace PAGE_URL with your page's canonical URL variable*/
+                  this.page.identifier = '/blog/welcome-to-massively-the-jekyll-theme/'; /*Replace PAGE_IDENTIFIER with your page's unique identifier variable*/
+              };
+
+              (function() {  /* dont endit below this line */
+                  var d = document, s = d.createElement('script');
+
+                  s.src = 'https://default.disqus.com/embed.js';
+
+                  s.setAttribute('data-timestamp', +new Date());
+                  (d.head || d.body).appendChild(s);
+              })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div><!-- /.comments-wrapper -->
+
+
+					<!-- Footer -->
+						<footer>
+              <ul class="actions">
+                <li><a href="/blog_space//blog/" class="button">Our Blog</a></li>
+              </ul>
+						</footer>
+					</div>
+
+				<!-- Footer -->
+        <footer id="footer">
+  <section>
+    <form method="POST" action="https://formspree.io/info@default.com">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" />
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" />
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea name="message" id="message" rows="3"></textarea>
+      </div>
+      <ul class="actions">
+        <li><input type="submit" value="Send Message" /></li>
+      </ul>
+    </form>
+  </section>
+  <section class="split contact">
+    <section class="alt">
+      <h3>Location</h3>
+      <p>Los Angeles, CA</p>
+    </section>
+    <section>
+      <h3>Phone</h3>
+      <p><a href="tel:310-318-5555">310-318-5555</a></p>
+    </section>
+    <section>
+      <h3>Email</h3>
+      <p><a href="mailto:info@default.com">info@default.com</a></p>
+    </section>
+    <section>
+      <h3>Social</h3>
+      <ul class="icons alt">
+        <li><a href="https://twitter.com/default" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+        <li><a href="https://facebook.com/default" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
+        <li><a href="https://instagram.com/default" class="icon fa-instagram" rel="nofollow"><span class="label">Instagram</span></a></li>
+        <li><a href="https://github.com/default" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+      </ul>
+    </section>
+  </section>
+</footer>
+<!-- Copyright -->
+<div id="copyright">
+  <ul><li>&copy; HTML5 UP</li><li>Design by <a href="https://html5up.net" rel="nofollow">HTML5 UP</a></li><li>Jekyll Integration by <a href="https://soundgrail.com">SoundGrail</a></li></ul>
+</div>
+
+
+			</div>
+
+      <!-- Scripts -->
+  		<!-- DYN -->
+<script src="/blog_space//assets/js/jquery.min.js"></script>
+<script src="/blog_space//assets/js/jquery.scrollex.min.js"></script>
+<script src="/blog_space//assets/js/jquery.scrolly.min.js"></script>
+<script src="/blog_space//assets/js/skel.min.js"></script>
+<script src="/blog_space//assets/js/util.js"></script>
+<script src="/blog_space//assets/js/main.js"></script>
+
+			<script async src="https://www.googletagmanager.com/gtag/js?id=default"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'default');
+</script>
+
+
+	</body>
+</html>
