@@ -7,7 +7,7 @@ sitemap:
     lastmod: 2017-11-02
     changefreq: weekly
 ---
-## About My Site
+## About Me and My Site
 
 <span class="image left"><img src="{{ "/images/about.jpg" | absolute_url }}" alt="" /></span>
 
