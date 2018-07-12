@@ -7,13 +7,13 @@ sitemap:
     lastmod: 2017-11-02
     changefreq: weekly
 ---
-## About our Site
+## About My Site
 
-<span class="image left"><img src="{{ "/images/pic04.jpg" | absolute_url }}" alt="" /></span>
+<span class="image left"><img src="{{ "/images/about.jpg" | absolute_url }}" alt="" /></span>
 
 Hey Folks! I am biking enthusiast and a software developer by passion. when it comes to development I have a nack for working and solving Data related processing. <br> My blogs are intended to share some deep insights (or you can say only insights) about various technolgies that deal with Data engineering.
 <br><br>
-Thanks for visiting
+Thanks for visiting.
 Happy coding!!
 
 Siddhartha Jain
