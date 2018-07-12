@@ -1,7 +1,7 @@
 # Site
-title:              Massively
-bio:                'Jekyll version of the Massively theme by HTML5UP'
-description:        "Jekyll version of the Massively theme by HTML5UP"
+title:              Data_Crunch
+bio:                'blogs on data space'
+description:        "blogs on data space"
 locale:             en_US
 baseurl: "" # the subpath of your site, e.g. /blog
 url: /blog_space/ # the base hostname & protocol for your site
