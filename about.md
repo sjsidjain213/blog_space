@@ -11,7 +11,7 @@ sitemap:
 
 <span class="image left"><img src="{{ "/images/about.jpg" | absolute_url }}" alt="" /></span>
 
-Hey Folks! I am biking enthusiast and a software developer by passion. when it comes to development I have a nack for working and solving Data related processing. <br> My blogs are intended to share some deep insights (or you can say only insights) about various technolgies that deal with Data engineering.
+Hey Folks! I am a biking enthusiast and a software developer by passion. When it comes to development I have a nack for working and solving problems related to Data Processing, Data Analysis and Building Data Pipeline. <br> My blogs are intended to share some deep insights (or can say only insights) about various technolgies that deals with Data engineering.
 <br><br>
 Thanks for visiting.
 Happy coding!!
