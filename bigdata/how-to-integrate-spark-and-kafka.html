@@ -72,7 +72,7 @@ Use case which we are going to consider have web application server as the sourc
 <li>Python 3.6</li>
 <li>MySQL 5.7</li>
 </ul>
-<h3>What are the bottlenecks?<h3>
+<h3>What are the bottlenecks?</h3>
 	<br>1. Primary bottleneck which I have come across is incorrect network configurations of cluster.
 		<br>a. Sometime it may be due incorrect definitions of TCP and UDP protocols on the port on which data is going to  be arrived or from which data is going to be read.
 	<br>2. Another Issue is, Spark running out of memory. Now, this memory issue can be of various types and can be at various levels. 
@@ -81,18 +81,18 @@ Use case which we are going to consider have web application server as the sourc
 	<br>
 <h3>How does it works?</h3>
 <ul>
-<li> At source we have a file based system where we store the logs generated for the web application these logs contains information related to:</li>
+<li> At source we have a file based system where we store the logs generated for the web application these logs contains information related to:
 <ul>
 <li>Response Time</li>
 <li>Request Type</li>
 <li>Response Code</li>
 <li>Map ID - This represent unique id of a printer (You can ignore. It's some business requirment)</li>
-</ul>		
+</ul></li>		
 <li>At Intermediate Stage, We have Spark cluster running over Yarn.</li> 
 	
-<li>At destination, We have a database in which data is getting stored<li>
+<li>At destination, We have a database in which data is getting stored
 	<ul><li>We also have a python based dashboard which is showing analysis of live stream of data.</li></ul>
-
+</li>
 	You can go in more detail even see the sample of code which I have prepared for this page on this link.
 <br>		I can tell you on length about each detail but I don’t that will be any use until you try and fail
 <br>		You can reach out to me if you need any help
