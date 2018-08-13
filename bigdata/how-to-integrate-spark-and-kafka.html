@@ -63,7 +63,7 @@ Objective is live transfer of data from source to destination. There can be vari
 Use case which we are going to consider have a web application server as the source, once data is read from the source there are two things we do one is to store a copy of the data in Database and other is to do real time processing on the other copy of the same data.
 <br> Idea behind saving one of the copy in database is to retain a golden copy of data in case something goes havoc.
 					<br>
-<ul>
+<ul><br>
 <h3>Components Used</h3>
 <li>Spark streaming 2.3.1</li>
 <li>Kafka 0.10.X</li>
@@ -81,7 +81,7 @@ Use case which we are going to consider have a web application server as the sou
 		<li>Another Issue is, Spark running out of memory. Now, this memory issue can be of various types and can be at various levels. </li>
 	<i>Note: One thing to remember is Spark always consider memory at two levels one is the memory which it is going to use and other is the memory which it keeps in buffer although it is not used it but it is required that this particular amount of memory should be their this tuning can  be configured but we will come on it in another blog.</i>
 	<li>It can also be related to application master not able to accept job. Due to memory not avalilable</li>
-	
+<br>	
 <h3>How does it works?</h3>
 <ul>
 <li> At source we have a file based system where we store the logs generated for the web application these logs contains information related to:
