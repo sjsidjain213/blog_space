@@ -60,8 +60,9 @@
       				<span class="date">21 Aug 2018</span>
 <h3>What is the Objective?</h3>
 Objective is live transfer of data from source to destination. There can be various type of sources and there can be various types of destination. 
-Use case which we are going to consider have web application server as the source, once data is read from the source their two things we do one is to store a copy of the data in Database and other is to do real time processing on the other copy of the same data.
-<br>
+Use case which we are going to consider have a web application server as the source, once data is read from the source there are two things we do one is to store a copy of the data in Database and other is to do real time processing on the other copy of the same data.
+<br> Idea behind saving one of the copy in database is to retain a golden copy of data in case something goes havoc.
+					<br>
 <ul>
 <h3>Components Used</h3>
 <li>Spark streaming 2.3.1</li>
@@ -73,13 +74,13 @@ Use case which we are going to consider have web application server as the sourc
 <li>MySQL 5.7</li>
 </ul>
 <h3>What are the bottlenecks?</h3>
-<ol>		<li>Primary bottleneck which I have come across is incorrect network configurations of cluster.
+<ol>		<li>Primary bottleneck which we have come across is incorrect network configurations of cluster.
 	<ol>
 		<li> Sometime it may be due incorrect definitions of TCP and UDP protocols on the port on which data is going to  be arrived or from which data is going to be read.</li>
 	</ol></li>
 		<li>Another Issue is, Spark running out of memory. Now, this memory issue can be of various types and can be at various levels. </li>
-	<i>Note: One thing to remember is Spark always consider memory at two levels one is the memory which it is going to use and other is the memory which it keeps in buffer although it is not used it but it is required that this particular amount of memory should be their this tuning can  be configured but we will come on it later.</i>
-	<li>It can related to application master not able to accept job. Due to memory not avalilable</li>
+	<i>Note: One thing to remember is Spark always consider memory at two levels one is the memory which it is going to use and other is the memory which it keeps in buffer although it is not used it but it is required that this particular amount of memory should be their this tuning can  be configured but we will come on it in another blog.</i>
+	<li>It can also be related to application master not able to accept job. Due to memory not avalilable</li>
 	
 <h3>How does it works?</h3>
 <ul>
@@ -97,7 +98,8 @@ Use case which we are going to consider have web application server as the sourc
 </li>
 	You can go in more detail even see the sample of code which I have prepared for this page on 
 	<a href="https://github.com/sjsidjain213/streamanalysis/graphs/contributors">this link.</a>
-<br>		I can tell you on length about each detail but I don’t that will be any use until you try and fail
+<br>		I can tell you on length about each detail but I don’t think that will be of any use until you try and fail. Moreover you can find 
+	the theoretical details about this scenario on many web pages.
 <br>		You can reach out to me if you need any help
 		<h4>Happy Streaming!!!!</h4>
 		  </header>
