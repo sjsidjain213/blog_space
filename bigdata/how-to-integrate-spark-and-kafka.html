@@ -58,27 +58,29 @@
           <section class="post">
     				<header class="major">
       				<span class="date">22 Aug 2018</span>
-	• Components Used
-		○ Spark streaming 2.3.1
-		○ Kafka 0.10.X
-		○ Hadoop 2.7.3 (yarn)
-		○ Java 1.8
-		○ Scala 2.11
-		○ Python 3.6
-		○ MySQL 5.7
-
+	
 What is the Objective?
 Objective is live transfer of data from source to destination. There can be various type of sources and there can be various types of destination. 
 Use case which we are going to consider have web application server as the source, once data is read from the source their two things we do one is to store a copy of the data in Database and other is to do real time processing on the other copy of the same data.
-
-
+<br>
+<ul>
+Components Used
+<li>Spark streaming 2.3.1</li>
+<li>Kafka 0.10.X</li>
+<li>Hadoop 2.7.3 (yarn)</li>
+<li>Java 1.8</li>
+<li>Scala 2.11</li>
+<li>Python 3.6</li>
+<li>MySQL 5.7</li>
+</ul>
+<br>
 What are the bottlenecks?
-	1. Primary bottleneck which I have come across is incorrect network configurations of cluster.
-		a. Sometime it may be due incorrect definitions of TCP and UDP protocols on the port on which data is going to  be arrived or from which data is going to be read.
-	2. Another Issue is, Spark running out of memory. Now, this memory issue can be of various types and can be at various levels. 
-	Note: One thing to remember is Spark always consider memory at two levels one is the memory which it is going to use and other is the memory which it keeps in buffer although it is not used it but it is required that this particular amount of memory should be their this tuning can  be configured but we will come on it later.
-		a. It can related to application master not able to accept job. Due to memory not avalilable.
-	
+	<br>1. Primary bottleneck which I have come across is incorrect network configurations of cluster.
+		<br>a. Sometime it may be due incorrect definitions of TCP and UDP protocols on the port on which data is going to  be arrived or from which data is going to be read.
+	<br>2. Another Issue is, Spark running out of memory. Now, this memory issue can be of various types and can be at various levels. 
+	<br>Note: One thing to remember is Spark always consider memory at two levels one is the memory which it is going to use and other is the memory which it keeps in buffer although it is not used it but it is required that this particular amount of memory should be their this tuning can  be configured but we will come on it later.
+	<br>	a. It can related to application master not able to accept job. Due to memory not avalilable.
+	<br>
 How does it works?
 	• At source we have a file based system where we store the logs generated for the web application these logs contains information related to:
 		○ Response Time 
