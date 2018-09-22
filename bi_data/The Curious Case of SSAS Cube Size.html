@@ -57,7 +57,7 @@
 				<div id="main">
           <section class = "post">
     				<header >
-      				<span class="date">21 Aug 2018</span>
+      				<span class="date">22 Sep 2018</span>
 <h1>The Curious Case of SSAS Cube Size</h1>
 What determines the SSAS cube Size? I was pretty sure about it's answer until I came across a unique scenario while working with one of the client. 
 <br><br>So scenario goes like this we were implementing a cube which had 5 facts and 6 dimensions and we decided to implement it using star schema. I was noting down the size of cube at every stage when it was in final stage the requirement got modified and we were asked to combine all the fact views into a single fact view.   
@@ -69,7 +69,7 @@ Coming back to the story, So I was expecting a decrease in the cube size but... 
 <br><br>
 At first we thought it might be due to increase in the data type for each column since when we combined all the fact views. The size of each column was set to max size for that column out of all the facts(This actually is an example of inconsitency in data warehouse but I will cover this in some other blog).
 So most of the numeric column got upgraded to bigint and int from int and tinyint taking the variation of size in the picture it's increase from 4 bytes of int to 8 bytes of bigint and multiplying that by around 80 millions records and converting in MB e.g 80000000*4 = 320000000/10^6 = 320MB.
-But still this was not the things that was affecting the size.					
+But still this was not the things that was affecting the size because even after correcting this, size did not came down that much.					
 Then I started my investigation and frankly there is no material available on internet that had its answer. So I searched and searched and searched. And after sometime few things came into my perspective which still is not the prefect explanation but might be close to the prefect answer. So below are the few things which matters in the size of cube.
 <br><br>
 	<b>1. Amount of Space For mapping</b> <br>
