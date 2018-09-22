@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+  Jekyll integration by somiibo.com
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+<title>Welcome to Jekyll Theme!</title>
+<meta name="description" content="">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/blog_space//assets/icon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/blog_space//assets/icon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/blog_space//assets/icon/favicon-16x16.png">
+<link rel="manifest" href="/blog_space//assets/icon/manifest.json">
+<link rel="mask-icon" href="/blog_space//assets/icon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/blog_space//assets/icon/favicon.ico">
+<meta name="msapplication-config" content="/blog_space//assets/icon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- CSS -->
+<link rel="stylesheet" href="/blog_space//assets/css/main.css" />
+<noscript><link rel="stylesheet" href="/blog_space//assets/css/noscript.css" /></noscript>
+
+	</head>
+	<body class="is-loading">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Header -->
+        <header id="header">
+          <a href="/blog_space//" class="logo">blog_space</a>
+        </header>
+
+				<!-- Nav -->
+					<nav id="nav">
+   <ul class="links">
+  <li class=" active "><a href="/blog_space//">Home</a></li>
+  <li class=""><a href="/blog_space//about/">About</a></li>
+			</ul>
+
+
+						<ul class="icons">
+              <li><a href="https://twitter.com/default" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+              <li><a href="https://facebook.com/default" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
+              <li><a href="https://instagram.com/default" class="icon fa-instagram" rel="nofollow"><span class="label">Instagram</span></a></li>
+              <li><a href="https://github.com/default" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+				<div id="main">
+          <section class = "post">
+    				<header >
+      				<span class="date">21 Aug 2018</span>
+<h1>The Curious Case of SSAS Cube Size</h1>
+What determines the SSAS cube Size? I was pretty sure about it's answer until I came across a unique scenario while working for one of my client. 
+So scenario goes like this we were implementing a cube which had 5 facts and 6 dimensions and we decided to implement it using star schema. We were noting down the size of cube at every stage when it was in final stage the requirement got modified and we were asked to combine all the fact views into a single fact view.   
+Each of the fact views were actually containing almost same attributes with couple of variations and it each of them had around 15 millions of records on the other hand each dimension were containing somewhere between 4000 to 8000 records. So when we checked the size of cube before modifying our approach it's size was around 900 MB. Which was pretty acceptable since we were following a full flash MOLAP Model. Thus we were quite happy with it's size.
+<br>
+Now, when we modified our approach by appending all the facts view into a single fact view keeping every other thing same just adding a new dimension to keep track of records source. 
+At first I was expecting the size of cube to go down because of reductions in number index since earlier there were around 5x6 = 30 indexes to maintain so there is definite reduction in indexing files. I will soon be publishing a new blog on SSAS storage file structure containing details about various type of file SSAS created for storage. 
+Coming back to the story, So I was expecting a decrease in the cube size but... but interestingly it went the other way around size got shoot up from 900 MB to 6.2 GB and I was puzzled. 
+<br>
+Then I started my investigation and frankly there is no material available on internet that had its answer. So I searched and searched and searched. And after sometime few things came into my perspective which still is not the prefect explanation but might be close to the prefect answer. So below are the few things which matters in the size of cube.
+<br>
+	1. Amount of Space For mapping: <br>
+	if you have ever studied Database then you must be aware about the paging concept. Database store everything on pages level but as I said we were using MOLAP model which means all the data was stored in SSAS not in database but it seems SSAS also took some queues from database. So there is increase in the mapping space when number of records increases in a single fact.
+	<br>
+	2. Way SSAS indexes data is also responsible when in the same file amount of records increases then the size of indexes keep on increases more rapidly.
+<br>
+Aside from these 2 solid things there are few other points also but those are just my assumption so I will rather not write them here.
+<br>
+There can be some other reasons also which might  be responsible for increase in size. So if you are aware about any of those please do share. 
+<br>
+Thanks
+<br>
+<h6>and do reach out to me if anything seems unclear.</h6>
+		  </header>
+
+      		</section>
+
+          <div class="comments-wrapper">
+          <div id="disqus_thread"></div>
+          <script>
+              /**
+               *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+               *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+               */
+              var disqus_config = function () {
+                  this.page.url = '/blog/welcome-to-massively-the-jekyll-theme/';  /*Replace PAGE_URL with your page's canonical URL variable*/
+                  this.page.identifier = '/blog/welcome-to-massively-the-jekyll-theme/'; /*Replace PAGE_IDENTIFIER with your page's unique identifier variable*/
+              };
+              (function() {  /* dont endit below this line */
+                  var d = document, s = d.createElement('script');
+                  s.src = 'https://default.disqus.com/embed.js';
+                  s.setAttribute('data-timestamp', +new Date());
+                  (d.head || d.body).appendChild(s);
+              })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div><!-- /.comments-wrapper -->
+
+
+					<!-- Footer -->
+						<footer>
+              <ul class="actions">
+                <li><a href="/blog_space//blog/" class="button">Our Blog</a></li>
+              </ul>
+						</footer>
+					</div>
+
+				<!-- Footer -->
+        <footer id="footer">
+  <section>
+    <form method="POST" action="https://formspree.io/info@default.com">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" />
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" />
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea name="message" id="message" rows="3"></textarea>
+      </div>
+      <ul class="actions">
+        <li><input type="submit" value="Send Message" /></li>
+      </ul>
+    </form>
+  </section>
+  <section class="split contact">
+    <section class="alt">
+      <h3>Location</h3>
+      <p>Los Angeles, CA</p>
+    </section>
+    <section>
+      <h3>Phone</h3>
+      <p><a href="tel:310-318-5555">310-318-5555</a></p>
+    </section>
+    <section>
+      <h3>Email</h3>
+      <p><a href="mailto:info@default.com">info@default.com</a></p>
+    </section>
+    <section>
+      <h3>Social</h3>
+      <ul class="icons alt">
+        <li><a href="https://twitter.com/default" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+        <li><a href="https://facebook.com/default" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
+        <li><a href="https://instagram.com/default" class="icon fa-instagram" rel="nofollow"><span class="label">Instagram</span></a></li>
+        <li><a href="https://github.com/default" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+      </ul>
+    </section>
+  </section>
+</footer>
+<!-- Copyright -->
+<div id="copyright">
+  <ul><li>&copy; HTML5 UP</li><li>Design by <a href="https://html5up.net" rel="nofollow">HTML5 UP</a></li><li>Jekyll Integration by <a href="https://soundgrail.com">SoundGrail</a></li></ul>
+</div>
+
+
+			</div>
+
+      <!-- Scripts -->
+  		<!-- DYN -->
+<script src="/blog_space//assets/js/jquery.min.js"></script>
+<script src="/blog_space//assets/js/jquery.scrollex.min.js"></script>
+<script src="/blog_space//assets/js/jquery.scrolly.min.js"></script>
+<script src="/blog_space//assets/js/skel.min.js"></script>
+<script src="/blog_space//assets/js/util.js"></script>
+<script src="/blog_space//assets/js/main.js"></script>
+
+			<script async src="https://www.googletagmanager.com/gtag/js?id=default"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+  gtag('config', 'default');
+</script>
+
+
+	</body>
+</html>
