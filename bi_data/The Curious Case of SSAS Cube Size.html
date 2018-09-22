@@ -60,7 +60,7 @@
       				<span class="date">21 Aug 2018</span>
 <h1>The Curious Case of SSAS Cube Size</h1>
 What determines the SSAS cube Size? I was pretty sure about it's answer until I came across a unique scenario while working for one of my client. 
-So scenario goes like this we were implementing a cube which had 5 facts and 6 dimensions and we decided to implement it using star schema. We were noting down the size of cube at every stage when it was in final stage the requirement got modified and we were asked to combine all the fact views into a single fact view.   
+<br>So scenario goes like this we were implementing a cube which had 5 facts and 6 dimensions and we decided to implement it using star schema. We were noting down the size of cube at every stage when it was in final stage the requirement got modified and we were asked to combine all the fact views into a single fact view.   
 Each of the fact views were actually containing almost same attributes with couple of variations and it each of them had around 15 millions of records on the other hand each dimension were containing somewhere between 4000 to 8000 records. So when we checked the size of cube before modifying our approach it's size was around 900 MB. Which was pretty acceptable since we were following a full flash MOLAP Model. Thus we were quite happy with it's size.
 <br>
 Now, when we modified our approach by appending all the facts view into a single fact view keeping every other thing same just adding a new dimension to keep track of records source. 
@@ -68,19 +68,18 @@ At first I was expecting the size of cube to go down because of reductions in nu
 Coming back to the story, So I was expecting a decrease in the cube size but... but interestingly it went the other way around size got shoot up from 900 MB to 6.2 GB and I was puzzled. 
 <br>
 Then I started my investigation and frankly there is no material available on internet that had its answer. So I searched and searched and searched. And after sometime few things came into my perspective which still is not the prefect explanation but might be close to the prefect answer. So below are the few things which matters in the size of cube.
-<br>
-	1. Amount of Space For mapping: <br>
+<br><br>
+	<b>1. Amount of Space For mapping</b> <br>
 	if you have ever studied Database then you must be aware about the paging concept. Database store everything on pages level but as I said we were using MOLAP model which means all the data was stored in SSAS not in database but it seems SSAS also took some queues from database. So there is increase in the mapping space when number of records increases in a single fact.
 	<br>
-	2. Way SSAS indexes data is also responsible when in the same file amount of records increases then the size of indexes keep on increases more rapidly.
+	<b>2. Way SSAS indexes data is also responsible when in the same file amount of records increases then the size of indexes keep on increases more rapidly.</b>
 <br>
 Aside from these 2 solid things there are few other points also but those are just my assumption so I will rather not write them here.
 <br>
 There can be some other reasons also which might  be responsible for increase in size. So if you are aware about any of those please do share. 
 <br>
-Thanks
 <br>
-<h6>and do reach out to me if anything seems unclear.</h6>
+<h6> Thanks and do reach out to me if anything seems unclear.</h6>
 		  </header>
 
       		</section>
