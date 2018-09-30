@@ -61,7 +61,7 @@
 <h1>Aggregations in SSAS Cube</h1>
 If you have ever searched on how to optimize a SSAS Cube or any similar thing then I am sure you must have heard of Aggregation in SSAS Cube.
 <br><br>
-<h3>What are Aggregation?</h3> 
+<h3>What is Aggregation?</h3> 
 	○ Aggregation is like creating summary table in SSAS engine, benefit is we do not need to maintain these summary table and it contains information which can be accessed quickly.
 <br>
 	○ In Default Aggregation type, MOLAP we cannot see the indexed view in which aggregation are stored while in ROLAP we can see the indexed view below is the example:
@@ -76,27 +76,27 @@ If you have ever searched on how to optimize a SSAS Cube or any similar thing th
 <br>
 <h3>Types of Aggregation Usage</h3>
 <h4>• Default</h4>
-	○ Here SSAS engine itself take decision of wether to include the attribute for aggregation or not based on multiple condition or situation present at that time.
+	○ Here SSAS engine itself take decision of whether to include the attribute for aggregation or not based on multiple condition or situation present at that time.
 	<br><br>
 <h4>• Full<br></h4>
-	○ Include in every aggregation. (or lower level attributes are added which can roll up to the desired level attribute)<br>
-	○ Use only for most commonly used attribute<br>
+	○ Include in every aggregation (or lower level attributes are added which can roll up to the desired level attribute).<br>
+	○ Used only for most commonly used attribute.<br>
 <br>	
 <h4>• None</h4>
 	○ Exclude in every aggregation.<br>
 	○ Used for infrequently used attributes.<br>
 <br>	
 <h4>• Unrestricted</h4>
-	○ No constraint<br>
-	○ Rule of thumb is there should not be more then 5-10 attribute per dimension in unrestricted more than this cube might take long time to come up with aggregation design
+	○ No constraint.<br>
+	○ Rule of thumb is there should not be more than 5-10 attribute per dimension in unrestricted more than this cube might take long time to come up with aggregation design.
 <br><br>
 <h4>Some Important Tips</h4>
-• Rule of thumb is to store 5 to 10% of aggregation as full store<br>
-• Another Standard rule which SSAS follow for optimization it do not store the calculation levels which have more 1/3 size of total rows in facts
+• Rule of thumb is to store 5% to 10% of aggregation as full store.<br>
+• Another Standard rule which SSAS follow for optimization is it do not store the calculation levels which have more then 1/3 size of total rows in facts.
 <br>
 
 <br>So Aggregation is good option for Cube optimization Although what I feel is Aggregation are little bit overrated (No offence to any Aggregation Lover). The reason I Feel so is because success of aggregation depends on if you are aware about the combination of attribute which you are going to hit most using through your report or query. 
-<br>For Example let's assume we have 2 tables with 4 and 3 attributes respectively
+<br>For Example let's assume we have 2 tables with 4 and 3 attributes respectively.
 	<br><h4>Product></h4>
 		&nbsp&nbspProduct_ID
 		<br>&nbsp&nbspProduct_Name
