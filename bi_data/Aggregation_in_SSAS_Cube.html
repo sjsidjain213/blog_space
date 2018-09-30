@@ -97,16 +97,16 @@ If you have ever searched on how to optimize a SSAS Cube or any similar thing th
 
 <br>So Aggregation is good option for Cube optimization Although what I feel is Aggregation are little bit overrated (No offence to any Aggregation Lover). The reason I Feel so is because success of aggregation depends on if you are aware about the combination of attribute which you are going to hit most using through your report or query. 
 <br>For Example let's assume we have 2 tables with 4 and 3 attributes respectively
-	<br>Product>
-		<pre>Product_ID</pre>
-		<pre>Product_Name</pre>
-		<pre>Product_Color</pre>
-		<pre>Product_Catrgory</pre>
+	<br><h4>Product></h4>
+		<br>&nbsp&nbspProduct_ID
+		<br>&nbsp&nbspProduct_Name
+		<br>&nbsp&nbspProduct_Color
+		<br>&nbsp&nbspProduct_Catrgory
 		
-	<br>Customer>
-		<pre>Customer_ID</pre>
-		<pre>Customer_Name</pre>
-		<pre>Customer_Location</pre>
+	<br><h4>Customer></h4>
+		<br>&nbsp&nbspCustomer_ID
+		<br>&nbsp&nbspCustomer_Name
+		<br>&nbsp&nbspCustomer_Location
 		<br>
 Now in the given example if I am sure that most of the time my business user want to see what is the Sales of a Particular Product_Category by Customer_Location then I can  create a aggregation on them. This is will defiantly increase the query performance but if I included any 3rd attribute also in query then it will simply not work. Which I think can happened most often. 
 <br>
