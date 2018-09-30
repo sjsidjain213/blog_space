@@ -77,19 +77,19 @@ If you have ever searched on how to optimize a SSAS Cube or any similar thing th
 <h3>Types of Aggregation Usage</h3>
 <h4>• Default</h4>
 	○ Here SSAS engine itself take decision of wether to include the attribute for aggregation or not based on multiple condition or situation present at that time.
-	<br>
+	<br><br>
 <h4>• Full<br></h4>
 	○ Include in every aggregation. (or lower level attributes are added which can roll up to the desired level attribute)<br>
 	○ Use only for most commonly used attribute<br>
-	
+<br>	
 <h4>• None</h4>
 	○ Exclude in every aggregation.<br>
 	○ Used for infrequently used attributes.<br>
-	
+<br>	
 <h4>• Unrestricted</h4>
 	○ No constraint<br>
 	○ Rule of thumb is there should not be more then 5-10 attribute per dimension in unrestricted more than this cube might take long time to come up with aggregation design
-<br>
+<br><br>
 <h4>Some Important Tips</h4>
 • Rule of thumb is to store 5 to 10% of aggregation as full store<br>
 • Another Standard rule which SSAS follow for optimization it do not store the calculation levels which have more 1/3 size of total rows in facts
@@ -98,15 +98,15 @@ If you have ever searched on how to optimize a SSAS Cube or any similar thing th
 <br>So Aggregation is good option for Cube optimization Although what I feel is Aggregation are little bit overrated (No offence to any Aggregation Lover). The reason I Feel so is because success of aggregation depends on if you are aware about the combination of attribute which you are going to hit most using through your report or query. 
 <br>For Example let's assume we have 2 tables with 4 and 3 attributes respectively
 	<br>Product>
-		<br><pre>Product_ID</pre>
-		<br><pre>Product_Name</pre>
-		<br><pre>Product_Color</pre>
-		<br><pre>Product_Catrgory</pre>
+		<pre>Product_ID</pre>
+		<pre>Product_Name</pre>
+		<pre>Product_Color</pre>
+		<pre>Product_Catrgory</pre>
 		
 	<br>Customer>
-		<br><pre>Customer_ID</pre>
-		<br><pre>Customer_Name</pre>
-		<br><pre>Customer_Location</pre>
+		<pre>Customer_ID</pre>
+		<pre>Customer_Name</pre>
+		<pre>Customer_Location</pre>
 		<br>
 Now in the given example if I am sure that most of the time my business user want to see what is the Sales of a Particular Product_Category by Customer_Location then I can  create a aggregation on them. This is will defiantly increase the query performance but if I included any 3rd attribute also in query then it will simply not work. Which I think can happened most often. 
 <br>
