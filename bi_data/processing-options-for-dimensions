@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+  Jekyll integration by somiibo.com
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+<title>Welcome to Jekyll Theme!</title>
+<meta name="description" content="">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/blog_space//assets/icon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/blog_space//assets/icon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/blog_space//assets/icon/favicon-16x16.png">
+<link rel="manifest" href="/blog_space//assets/icon/manifest.json">
+<link rel="mask-icon" href="/blog_space//assets/icon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/blog_space//assets/icon/favicon.ico">
+<meta name="msapplication-config" content="/blog_space//assets/icon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- CSS -->
+<link rel="stylesheet" href="/blog_space//assets/css/main.css" />
+<noscript><link rel="stylesheet" href="/blog_space//assets/css/noscript.css" /></noscript>
+
+	</head>
+	<body class="is-loading">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Header -->
+        <header id="header">
+          <a href="/blog_space//" class="logo">blog_space</a>
+        </header>
+
+				<!-- Nav -->
+					<nav id="nav">
+   <ul class="links">
+  <li class=" active "><a href="/blog_space//">Home</a></li>
+  <li class=""><a href="/blog_space//about/">About</a></li>
+			</ul>
+
+
+						<ul class="icons">
+              <li><a href="https://twitter.com/default" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+              <li><a href="https://facebook.com/default" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
+              <li><a href="https://instagram.com/default" class="icon fa-instagram" rel="nofollow"><span class="label">Instagram</span></a></li>
+              <li><a href="https://github.com/default" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+				<div id="main">
+          <section class = "post">
+    				<header >
+      				<span class="date">07 Oct 2018</span>
+	<h1>Processing Types For Dimension in SSAS</h1>					
+Processing model of SSAS Cube is quite interesting. Each step in the processing depends on the current state of the entity which we are processing and this affect other entities too. 
+<hr>  <hr>
+There are various options related to the processing of the dimensions which are as followings:<hr>
+<hr>· Process Default: Here SSAS Engine will do minimum work to bring the dimension to a valid state so that it can be used by others. 
+<hr>· Process Full:  as its name suggests it rebuild the whole object from scratch. All the existing data and aggregations are dropped.  
+<hr>· Process Clear: It discard the state of the existing object. It also makes the state of all other objects to invalid which is using this object.
+<hr>· Process Data: In this option for dimension it rebuilds only the data part of the dimension. Which includes hierarchy and Attributes.
+<hr>· Process Index: It rebuilds all the index related files for an attribute.
+<hr>· Process Update: This one is interesting. It is kind of incremental dimension processing. It reads the whole data of dimension same as in Process Full. Then the valid question arises "how is it different from Process Full?" The difference is that it does not discard the current state of the object. It just checks if there is a change and then work according to that.
+	<hr><hr>So there can be 3 types of changes that can occur:  
+	Case 1: when a new member is included in the dimension then the existing data for that dimension within the cube is not dropped and the new member is simply added. The data for that new attribute is also calculated and added in the measure group.
+	 <hr><hr>
+	Case 2: When an existing Member of dimension is updated in this case all the data and aggregation related to this dimension is dropped from the cube and Cube is moved to the invalid state. Then it is required to reprocess the dimension and the cube.
+	 <hr><hr>
+	Case 3: When an existing Member is dropped then also same the same process is followed as in Case 2.
+	 <hr><hr>
+	So this was all about the different processing option in the cube and how do they affect different objects related to them.
+	
+<h6>Thank You</h6>
+		  </header>
+
+      		</section>
+
+          <div class="comments-wrapper">
+          <div id="disqus_thread"></div>
+          <script>
+              /**
+               *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+               *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+               */
+              var disqus_config = function () {
+                  this.page.url = '/blog/welcome-to-massively-the-jekyll-theme/';  /*Replace PAGE_URL with your page's canonical URL variable*/
+                  this.page.identifier = '/blog/welcome-to-massively-the-jekyll-theme/'; /*Replace PAGE_IDENTIFIER with your page's unique identifier variable*/
+              };
+              (function() {  /* dont endit below this line */
+                  var d = document, s = d.createElement('script');
+                  s.src = 'https://default.disqus.com/embed.js';
+                  s.setAttribute('data-timestamp', +new Date());
+                  (d.head || d.body).appendChild(s);
+              })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div><!-- /.comments-wrapper -->
+
+
+					<!-- Footer -->
+						<footer>
+              <ul class="actions">
+                <li><a href="/blog_space//blog/" class="button">Our Blog</a></li>
+              </ul>
+						</footer>
+					</div>
+
+				<!-- Footer -->
+        <footer id="footer">
+  <section>
+    <form method="POST" action="https://formspree.io/info@default.com">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" />
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" />
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea name="message" id="message" rows="3"></textarea>
+      </div>
+      <ul class="actions">
+        <li><input type="submit" value="Send Message" /></li>
+      </ul>
+    </form>
+  </section>
+  <section class="split contact">
+    <section class="alt">
+      <h3>Location</h3>
+      <p>Los Angeles, CA</p>
+    </section>
+    <section>
+      <h3>Phone</h3>
+      <p><a href="tel:310-318-5555">310-318-5555</a></p>
+    </section>
+    <section>
+      <h3>Email</h3>
+      <p><a href="mailto:info@default.com">info@default.com</a></p>
+    </section>
+    <section>
+      <h3>Social</h3>
+      <ul class="icons alt">
+        <li><a href="https://twitter.com/default" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+        <li><a href="https://facebook.com/default" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
+        <li><a href="https://instagram.com/default" class="icon fa-instagram" rel="nofollow"><span class="label">Instagram</span></a></li>
+        <li><a href="https://github.com/default" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+      </ul>
+    </section>
+  </section>
+</footer>
+<!-- Copyright -->
+<div id="copyright">
+  <ul><li>&copy; HTML5 UP</li><li>Design by <a href="https://html5up.net" rel="nofollow">HTML5 UP</a></li><li>Jekyll Integration by <a href="https://soundgrail.com">SoundGrail</a></li></ul>
+</div>
+
+
+			</div>
+
+      <!-- Scripts -->
+  		<!-- DYN -->
+<script src="/blog_space//assets/js/jquery.min.js"></script>
+<script src="/blog_space//assets/js/jquery.scrollex.min.js"></script>
+<script src="/blog_space//assets/js/jquery.scrolly.min.js"></script>
+<script src="/blog_space//assets/js/skel.min.js"></script>
+<script src="/blog_space//assets/js/util.js"></script>
+<script src="/blog_space//assets/js/main.js"></script>
+
+			<script async src="https://www.googletagmanager.com/gtag/js?id=default"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+  gtag('config', 'default');
+</script>
+
+
+	</body>
+</html>
