@@ -69,7 +69,7 @@ There are various options related to the processing of the dimensions which are 
 <br><b>· Process Data:</b>In this option for dimension it rebuilds only the data part of the dimension. Which includes hierarchy and Attributes.
 <br><b>· Process Index:</b> It rebuilds all the index related files for an attribute.
 <br><b>· Process Update:</b> This one is interesting. It is kind of incremental dimension processing. It reads the whole data of dimension same as in Process Full. Then the valid question arises "how is it different from Process Full?" The difference is that it does not discard the current state of the object. It just checks if there is a change and then work according to that.
-<br><br>So there can be 3 types of changes that can occur: 
+<br><br>So there can be 3 types of changes that can occur: <br>
 <b>Case 1:</b> when a new member is included in the dimension then the existing data for that dimension within the cube is not dropped and the new member is simply added. The data for that new attribute is also calculated and added in the measure group.
 <br>
 <b>Case 2:</b> When an existing Member of dimension is updated in this case all the data and aggregation related to this dimension is dropped from the cube and Cube is moved to the invalid state. Then it is required to reprocess the dimension and the cube.
