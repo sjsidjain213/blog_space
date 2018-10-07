@@ -59,15 +59,17 @@
     				<header >
       				<span class="date">07 Oct 2018</span>
 	<h1>Processing Types For Dimension in SSAS</h1>					
-Processing model of SSAS Cube is quite interesting. Each step in the processing depends on the current state of the entity which we are processing and this affect other entities too. 
+Processing model of SSAS Cube is quite interesting. Each step in the processing depends on the current state of the object 
+					which we are processing and this affect other objects too. 
 <br>  <br>
-<a href="#" class="image main"><img src="Processing_Options.png" alt="" /></a>	
-There are various options related to the processing of the dimensions which are as followings:
-<br><b>· Process Default:</b> Here SSAS Engine will do minimum work to bring the dimension to a valid state so that it can be used by others. 
-<br><b>· Process Full:</b>as its name suggests it rebuild the whole object from scratch. All the existing data and aggregations are dropped.  
+<a href="#" class="image main"><img src="Processing_Options.png" alt=""/></a>	
+In this blog we are going to look about the processing options in Dimension. 
+Below are the options that are available in SSAS:
+<br><b>· Process Default:</b> Here SSAS Engine will do minimum work to bring the dimension to a valid state so that it can be used by other objects. 
+<br><b>· Process Full:</b>As it's name suggest it rebuild the whole object from scratch. All the existing data and aggregations are dropped.  
 <br><b>· Process Clear:</b> It discard the state of the existing object. It also makes the state of all other objects to invalid which is using this object.
-<br><b>· Process Data:</b>In this option for dimension it rebuilds only the data part of the dimension. Which includes hierarchy and Attributes.
-<br><b>· Process Index:</b> It rebuilds all the index related files for an attribute.
+<br><b>· Process Data:</b>In this option for dimension, it rebuilds only the data part of the dimension. Which includes hierarchy and Attributes.
+<br><b>· Process Index:</b> It rebuilds all the index related files of an attribute in the dimension.
 <br><b>· Process Update:</b> This one is interesting. It is kind of incremental dimension processing. It reads the whole data of dimension same as in Process Full. Then the valid question arises "how is it different from Process Full?" The difference is that it does not discard the current state of the object. It just checks if there is a change and then work according to that.
 <br>So there can be 3 types of changes that can occur: <br>
 <b>Case 1:</b> when a new member is included in the dimension then the existing data for that dimension within the cube is not dropped and the new member is simply added. The data for that new attribute is also calculated and added in the measure group.
